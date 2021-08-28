@@ -10,21 +10,18 @@ const Home = () => {
     phone: ''
   })
 
-  function handleInputChange (event) {
+  function handleInputChange(event) {
     setForm({
       ...form,
       [event.target.name]: event.target.value
     })
   }
 
-  function handleSubmit (event) {
+  function handleSubmit(event) {
     event.preventDefault()
-    console.log('FOMR: ', form)
-
     const data = JSON.stringify(form)
-    // const data = form
 
-    fetch(`http://localhost:8000/company/`, {
+    fetch(`http://localhost:8000/company`, {
       method: 'POST',
       body: data,
       headers: {
@@ -41,6 +38,7 @@ const Home = () => {
       })
       .catch(error => console.log(error))
   }
+
   return (
     <>
       <Header

@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from database import create_tables
 import controller
 
+
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/company", methods=["POST"])
@@ -47,15 +50,15 @@ def delete_company(id):
     return jsonify(result)
 
 
-#Enable CORS after each request
-@app.after_request
-def after_request(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    response.headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE"
-    response.headers[
-        "Access-Control-Allow-Headers"] = "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
-    return response
+# Enable CORS after each request
+# @app.after_request
+# def after_request(response):
+#     response.headers["Access-Control-Allow-Origin"] = "*"
+#     response.headers["Access-Control-Allow-Credentials"] = "true"
+#     response.headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS"
+#     response.headers[
+#         "Access-Control-Allow-Headers"] = "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+#     return response
 
 
 if __name__ == "__main__":

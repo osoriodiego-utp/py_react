@@ -1,7 +1,7 @@
 from database import get_database
 
 
-#insert_game
+# insert_game
 def Create_company(name, address, nit, phone):
     database = get_database()
     cursor = database.cursor()
@@ -43,4 +43,17 @@ def Get_companies():
     cursor = database.cursor()
     statement = "SELECT id, name, address, nit, phone FROM company"
     cursor.execute(statement)
-    return cursor.fetchall()
+    response = cursor.fetchall()
+
+    result = []
+
+    for row in response:
+        result.append({
+            "id": row[0],
+            "name": row[1],
+            "address": row[2],
+            "nit": row[3],
+            "phone": row[4]
+        })
+
+    return result
